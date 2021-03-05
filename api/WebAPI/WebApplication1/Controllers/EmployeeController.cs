@@ -15,6 +15,7 @@ namespace WebApplication1.Controllers
     {
         public HttpResponseMessage Get()
         {
+            //This is EmployeeController File
             //we should always use query with stored procedure this is not a good practice.
             string query = @"select EmployeeId,EmployeeName,Department,
                             convert(varchar(10),DateOfJoining,120),
@@ -131,6 +132,8 @@ namespace WebApplication1.Controllers
                 da.Fill(table);
             }
             return Request.CreateResponse(HttpStatusCode.OK, table);
+
+            
         }
     }
 }
