@@ -8,6 +8,7 @@ using WebApplication1.Models;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Web;
 
 namespace WebApplication1.Controllers
 {
@@ -131,9 +132,26 @@ namespace WebApplication1.Controllers
                 cmd.CommandType = CommandType.Text;
                 da.Fill(table);
             }
-            return Request.CreateResponse(HttpStatusCode.OK, table);
+            return Request.CreateResponse(HttpStatusCode.OK, table);    
+        }
+        [Route("api/Employee/SaveFile")]
+        public string SaveFile()
+        {
+            try
+            {
+                var httpRequest = HttpContext.Current.Request;
+                var postedFile = httpRequest.Files[0];
+                var fileName = postedFile.FileName;
+                var physicalPath = HttpContext.Current.Server.MapPath("~/Models/Photos/"+fileName);
 
-            
+                postedFile.SaveAs(physicalPath);
+
+                return fileName;
+            }
+            catch(Exception)
+            {
+                return "anonymous.png";
+            }
         }
     }
 }
