@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ShowDepComponent } from 'src/app/department/show-dep/show-dep.component';
 
 @Component({
   selector: 'app-department',

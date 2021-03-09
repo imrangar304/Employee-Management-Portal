@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SharedService } from 'src/app/shared.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angularEmployeeManagement';
+  constructor(private service:SharedService) { }
+
+  DepartmentList:any=[];
+
+  ngOnInit(): void {
+    this.DepList();
+  }
+
+  DepList(){
+    this.service.getDepList().subscribe(data=>{
+      this.DepartmentList=data;
+    });
+}
 }
